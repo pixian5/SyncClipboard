@@ -1,0 +1,12 @@
+{
+  "server_url": "http://localhost:5033",
+  "username": "admin",
+  "password": "password",
+  "auto_sync": true,
+  "sync_interval": 5,
+  "sync_text": true,
+  "sync_images": true,
+  "sync_files": true,
+  "last_sync": null,
+  "clipboard_history_size": 100
+}

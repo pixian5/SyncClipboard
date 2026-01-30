@@ -100,7 +100,7 @@ class SyncClipboardCLI:
                 # Set text clipboard
                 if self.clipboard_manager.set_clipboard_data(clipboard_data):
                     content = clipboard_data.get("Clipboard", "")
-                    preview = content[:50] + "..." if len(content) > 50 else content
+                    preview = content[:50] + ("..." if len(content) > 50 else "")
                     print(f"✓ Text clipboard downloaded: {preview}")
                     self.config_manager.set('last_sync', datetime.now().isoformat())
                     return True

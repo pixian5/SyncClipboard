@@ -23,7 +23,7 @@ def test_config_manager():
         # Test initialization
         config = ConfigManager(config_path)
         assert config.get('server_url') == 'http://localhost:5033'
-        assert config.get('username') == 'admin'
+        assert config.get('username') == 'your_username'
         print("✓ Config initialization works")
         
         # Test set

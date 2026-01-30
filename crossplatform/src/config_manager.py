@@ -13,8 +13,8 @@ class ConfigManager:
     
     DEFAULT_CONFIG = {
         "server_url": "http://localhost:5033",
-        "username": "admin",
-        "password": "password",
+        "username": "your_username",
+        "password": "your_password",
         "auto_sync": True,
         "sync_interval": 5,
         "sync_text": True,
@@ -31,7 +31,8 @@ class ConfigManager:
             if os.name == 'nt':  # Windows
                 config_dir = os.path.join(os.environ['APPDATA'], 'SyncClipboard')
             elif os.name == 'posix':
-                if 'darwin' in os.sys.platform:  # macOS
+                import sys
+                if sys.platform == 'darwin':  # macOS
                     config_dir = os.path.expanduser('~/Library/Application Support/SyncClipboard')
                 else:  # Linux
                     config_dir = os.path.expanduser('~/.config/SyncClipboard')
@@ -70,6 +71,11 @@ class ConfigManager:
             os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
             with open(self.config_path, 'w') as f:
                 json.dump(config, f, indent=2)
+            
+            # Set secure file permissions on Unix systems
+            if os.name == 'posix':
+                os.chmod(self.config_path, 0o600)
+            
             return True
         except Exception as e:
             print(f"Error saving config: {e}")

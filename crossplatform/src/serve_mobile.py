@@ -22,6 +22,9 @@ if __name__ == '__main__':
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
         print(f"Serving mobile PWA at http://localhost:{PORT}")
         print("Open this URL in your browser or mobile device")
+        print("\n⚠️  WARNING: Clipboard API requires HTTPS for remote access!")
+        print("    On localhost it will work, but remote devices need HTTPS.")
+        print("    Consider using an HTTPS reverse proxy for remote access.\n")
         print("Press Ctrl+C to stop")
         try:
             httpd.serve_forever()

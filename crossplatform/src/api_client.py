@@ -20,6 +20,16 @@ class SyncClipboardAPI:
         self.auth = HTTPBasicAuth(username, password)
         self.session = requests.Session()
         self.session.auth = self.auth
+        
+        # Warn about HTTP vs HTTPS
+        if self.server_url.startswith('http://') and not self.server_url.startswith('http://localhost') and not self.server_url.startswith('http://127.0.0.1'):
+            import warnings
+            warnings.warn(
+                "Using HTTP (not HTTPS) for remote server. "
+                "Credentials and clipboard data will be transmitted in plaintext. "
+                "Consider using HTTPS for security.",
+                UserWarning
+            )
     
     def get_clipboard(self) -> Optional[Dict[str, Any]]:
         """Get clipboard content from server"""

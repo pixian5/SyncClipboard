@@ -308,6 +308,9 @@ class SyncClipboardGUI(QMainWindow):
         dialog = SettingsDialog(self.config_manager, self)
         if dialog.exec():
             self.log("Settings saved")
+            # Close old API client session
+            if hasattr(self.api_client, 'session'):
+                self.api_client.session.close()
             # Recreate API client with new settings
             self.api_client = self._create_api_client()
             # Update timer
